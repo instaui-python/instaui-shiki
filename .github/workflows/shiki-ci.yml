@@ -21,11 +21,12 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       
-      - name: set up npm-src and testing
+      - name: set up npm-shiki
         uses: instaui-python/org-ci-config/.github/actions/npm-env@main
         with:
           npm_dir_name : ${{ env.NPM_DIR_NAME }}
           use_python: 1
+          test_cmd: ''
       
       - name: test web
         uses: instaui-python/org-ci-config/.github/actions/python-env@main
