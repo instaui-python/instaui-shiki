@@ -1,13 +1,12 @@
-name: CI for instaui-shiki
+name: Test on instaui tag trigger
+
 on:
-  workflow_dispatch:
-  pull_request:
-    branches:
-      - main
+  repository_dispatch:
+    types: [instaui_tagged]
 
 
 env:
-  NPM_DIR_NAME: npm-shiki
+  NPM_DIR_NAME: npm-src
 
 jobs:
   testing:
@@ -20,23 +19,20 @@ jobs:
         python-version: ['3.12']
     steps:
       - uses: actions/checkout@v4
-      
+
       - name: set up python and uv
         uses: instaui-python/org-ci-config/.github/actions/python-env@main
 
-      - name: set up npm-shiki
+      - name: set up npm-src and testing
         uses: instaui-python/org-ci-config/.github/actions/npm-env@main
         with:
           npm_dir_name : ${{ env.NPM_DIR_NAME }}
-          test_cmd: ''
-      
+
       - name: Install the project
-        run: uv sync --dev --no-sources
-        shell: bash
-        
-      - name: run tests
-        run: |
-          uv run --no-sources pytest __tests
+        run: uv sync --dev
         shell: bash
 
- 
+      - name: run tests
+        run: |
+          uv run pytest __tests
+        shell: bash
