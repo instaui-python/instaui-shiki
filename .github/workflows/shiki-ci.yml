@@ -35,6 +35,7 @@ jobs:
         shell: bash
         
       - name: run tests
+        timeout-minutes: 1
         run: |
           uv run --no-sources pytest __tests
         shell: bash

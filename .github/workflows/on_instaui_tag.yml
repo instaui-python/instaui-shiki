@@ -33,6 +33,7 @@ jobs:
         shell: bash
 
       - name: run tests
+        timeout-minutes: 1
         run: |
           uv run pytest __tests
         shell: bash
