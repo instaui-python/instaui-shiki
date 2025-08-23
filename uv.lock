@@ -590,8 +590,8 @@ wheels = [
 
 [[package]]
 name = "instaui"
-version = "0.4.0"
-source = { git = "https://github.com/instaui-python/instaui.git?branch=main#979679d7ecb661e1a8127e489f8138577cbed49f" }
+version = "0.5.0"
+source = { registry = "https://mirrors.aliyun.com/pypi/simple" }
 dependencies = [
     { name = "jinja2" },
     { name = "orjson", version = "3.10.15", source = { registry = "https://mirrors.aliyun.com/pypi/simple" }, marker = "python_full_version < '3.9'" },
@@ -600,6 +600,10 @@ dependencies = [
     { name = "pydantic", version = "2.11.7", source = { registry = "https://mirrors.aliyun.com/pypi/simple" }, marker = "python_full_version >= '3.9'" },
     { name = "typing-extensions", version = "4.13.2", source = { registry = "https://mirrors.aliyun.com/pypi/simple" }, marker = "python_full_version < '3.9'" },
     { name = "typing-extensions", version = "4.14.1", source = { registry = "https://mirrors.aliyun.com/pypi/simple" }, marker = "python_full_version >= '3.9'" },
+]
+sdist = { url = "https://mirrors.aliyun.com/pypi/packages/12/60/41a01f7e44b9f58223d23e7eb206e83bb32f53d79b006bbdce844ecb31e0/instaui-0.5.0.tar.gz", hash = "sha256:281fde99af5bd6a17b8c263cf74012a7386d9060f9c5c758df42ff9ed3be52fa" }
+wheels = [
+    { url = "https://mirrors.aliyun.com/pypi/packages/04/2d/da5010f620b3f30f659f3ea25d9534c67f9d83c4bb2ae4d07d6384040117/instaui-0.5.0-py3-none-any.whl", hash = "sha256:f96a8a80abd555903898253fa00eda910819209024d0c9e039a5c812a38c4382" },
 ]
 
 [package.optional-dependencies]
@@ -612,7 +616,7 @@ all = [
 
 [[package]]
 name = "instaui-shiki"
-version = "0.2.0"
+version = "0.2.1"
 source = { editable = "." }
 dependencies = [
     { name = "instaui" },
@@ -637,11 +641,11 @@ lint = [
 ]
 
 [package.metadata]
-requires-dist = [{ name = "instaui", git = "https://github.com/instaui-python/instaui.git?branch=main" }]
+requires-dist = [{ name = "instaui", specifier = "~=0.5.0" }]
 
 [package.metadata.requires-dev]
 dev = [
-    { name = "instaui", extras = ["all"], git = "https://github.com/instaui-python/instaui.git?branch=main" },
+    { name = "instaui", extras = ["all"] },
     { name = "playwright", specifier = "<1.52.0" },
     { name = "pytest", specifier = ">=8.3.5" },
     { name = "pytest-asyncio", specifier = ">=0.24.0" },
