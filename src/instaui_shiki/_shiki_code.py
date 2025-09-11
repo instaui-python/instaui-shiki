@@ -2,7 +2,7 @@ from __future__ import annotations
 from pathlib import Path
 from typing import Dict, Iterable, List, Literal, Optional
 from instaui import ui
-from instaui.runtime._app import get_app_slot
+from instaui.runtime import get_app_slot
 
 _STATIC_DIR = Path(__file__).parent / "static"
 _THEME_DIR = _STATIC_DIR / "themes"
