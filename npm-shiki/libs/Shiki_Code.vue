@@ -1,11 +1,6 @@
 <script setup lang="ts">
-import {
-  h,
-  ref,
-  watch,
-  computed,
-  normalizeClass as _normalizeClass,
-} from "vue";
+import { ref, watch, computed, normalizeClass } from "vue";
+import { useBindingGetter } from "instaui";
 import type { TProps } from "./types";
 import {
   highlighterTask,
@@ -21,14 +16,17 @@ const {
     light: "vitesse-light",
     dark: "vitesse-dark",
   },
+  useDark,
 } = props;
-
+const { getValue } = useBindingGetter();
 const highlightedCode = ref("");
 const realLanguage = computed(() => props.language || "python");
-const realTheme = computed(() => props.theme || "light");
+const realTheme = computed(
+  () => props.theme || (getValue(useDark) ? "dark" : "light")
+);
 const realLineNumbers = computed(() => props.lineNumbers ?? true);
 const classes = computed(() => {
-  return _normalizeClass([
+  return normalizeClass([
     `language-${realLanguage.value}`,
     `theme-${realTheme.value}`,
     `shiki-code`,

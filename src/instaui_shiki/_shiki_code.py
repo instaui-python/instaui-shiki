@@ -1,7 +1,7 @@
 from __future__ import annotations
 from pathlib import Path
 from typing import Dict, Iterable, List, Literal, Optional
-from instaui import ui
+from instaui import ui, custom
 from instaui.runtime import get_app_slot
 
 _STATIC_DIR = Path(__file__).parent / "static"
@@ -29,7 +29,7 @@ _ZERO_IMPORT_MAPS = {
 
 
 class Code(
-    ui.element,
+    custom.element,
     esm="./static/shiki_code.js",
     externals=_IMPORT_MAPS,
     css=[_STYLE],
@@ -47,7 +47,7 @@ class Code(
         line_numbers: Optional[ui.TMaybeRef[bool]] = None,
     ):
         super().__init__()
-        self.props({"code": code})
+        self.props({"code": code, "useDark": custom.convert_reference(ui.use_dark())})
 
         if language:
             self.props({"language": language})
