@@ -1,13 +1,14 @@
+import { computed, normalizeClass, watch } from "vue";
 import { useClipboard } from "@vueuse/core";
 import { createHighlighter } from "./shiki_core";
-import { computed, normalizeClass as _normalizeClass, watch } from "vue";
+import type { TProps } from "./types";
 
 export const highlighterTask = createHighlighter({
   themes: ["vitesse-dark", "vitesse-light"],
 });
 
 function transformersModuleGetter() {
-  let module = null;
+  let module: any = null;
 
   return async () => {
     if (!module) {
@@ -20,11 +21,7 @@ function transformersModuleGetter() {
 
 export const getTransformersModule = transformersModuleGetter();
 
-/**
- *
- * @param {string[]} names
- */
-export async function getTransformers(names) {
+export async function getTransformers(names: string[]) {
   if (names.length === 0) {
     return [];
   }
@@ -38,25 +35,25 @@ export async function getTransformers(names) {
   });
 }
 
-export function readyCopyButton(props) {
+export function readyCopyButton(props: TProps) {
   const { copy, copied } = useClipboard({ source: props.code, legacy: true });
 
   const btnClasses = computed(() => {
-    return _normalizeClass(["copy", { copied: copied.value }]);
+    return normalizeClass(["copy", { copied: copied.value }]);
   });
 
   /**
    *
    * @param {Event} e
    */
-  function copyButtonClick(e) {
+  function copyButtonClick(e: Event) {
     copy(props.code);
 
     watch(
       copied,
       (copied) => {
         if (!copied) {
-          e.target.blur();
+          (e.target! as any).blur();
         }
       },
       { once: true }

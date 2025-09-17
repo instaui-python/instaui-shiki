@@ -3,13 +3,13 @@ from instaui import ui, html, zero
 
 
 def test_base(context: Context):
-    with zero() as z:
+    def index():
         code = ui.state("print('foo')")
 
         html.textarea(code)
         ui.code(code)
 
-        context.open(z.to_html_str())
+    context.open(zero().to_html_str(index))
 
     context.expect(_utils.locator_code_span(context, text="foo")).to_be_visible()
 

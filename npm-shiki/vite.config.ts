@@ -23,7 +23,7 @@ export default defineConfig({
     // sourcemap: true,
 
     rollupOptions: {
-      external: ["vue", "@shiki/transformers"],
+      external: ["vue", "@shiki/transformers", "instaui"],
     },
   },
 });

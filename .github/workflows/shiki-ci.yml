@@ -13,16 +13,16 @@ jobs:
   testing:
     name: testing web app
     runs-on: ubuntu-latest
-    container:
-      image: mcr.microsoft.com/playwright:v1.47.0-focal
     strategy:
       matrix:
         python-version: ['3.12']
     steps:
       - uses: actions/checkout@v4
-      
-      - name: set up python and uv
-        uses: instaui-python/org-ci-config/.github/actions/python-env@main
+
+      - name: Install uv
+        uses: astral-sh/setup-uv@v5
+        with:
+          enable-cache: true
 
       - name: set up npm-shiki
         uses: instaui-python/org-ci-config/.github/actions/npm-env@main
@@ -30,10 +30,9 @@ jobs:
           npm_dir_name : ${{ env.NPM_DIR_NAME }}
           test_cmd: ''
       
-      - name: Install the project
-        run: uv sync --dev --no-sources
-        shell: bash
-        
+      - name: set up python and playwright and install the project
+        uses: instaui-python/org-ci-config/.github/actions/playwright-python-env@main
+
       - name: run tests
         timeout-minutes: 1
         run: |
