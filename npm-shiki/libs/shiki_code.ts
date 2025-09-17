@@ -1,6 +1,6 @@
+import { computed, normalizeClass, watch } from "vue";
 import { useClipboard } from "@vueuse/core";
 import { createHighlighter } from "./shiki_core";
-import { computed, normalizeClass, watch } from "vue";
 import type { TProps } from "./types";
 
 export const highlighterTask = createHighlighter({

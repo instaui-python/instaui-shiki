@@ -72,5 +72,3 @@ const { copyButtonClick, btnClasses } = readyCopyButton(props);
     <div v-html="highlightedCode" style="overflow: hidden"></div>
   </div>
 </template>
-
-<style scoped></style>
