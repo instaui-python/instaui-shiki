@@ -1,6 +1,6 @@
 [project]
 name = "instaui-shiki"
-version = "0.2.1"
+version = "0.3.0"
 description = "A Python package for instaui-shiki."
 keywords = ["ui", "gui", "web", "shiki" , "syntax-highlighting"]
 license = "MIT"
