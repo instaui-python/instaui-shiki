@@ -1,30 +1,25 @@
 from __future__ import annotations
-from pathlib import Path
 from typing import Dict, Iterable, List, Literal, Optional
 from instaui import ui, custom
 from instaui.runtime import get_app_slot
+from . import consts
 
-_STATIC_DIR = Path(__file__).parent / "static"
-_THEME_DIR = _STATIC_DIR / "themes"
-_LANG_DIR = _STATIC_DIR / "langs"
-_SHIKI_TRANSFORMERS_FILE = _STATIC_DIR / "shiki-transformers.js"
-_STYLE = _STATIC_DIR / "shiki-style.css"
-
-
-_LANGS_IMPORT_NAME = "@shiki/langs/"
-_THEMES_IMPORT_NAME = "@shiki/themes/"
 
 _IMPORT_MAPS = {
-    "@shiki/transformers": _SHIKI_TRANSFORMERS_FILE,
-    _LANGS_IMPORT_NAME: _LANG_DIR,
-    _THEMES_IMPORT_NAME: _THEME_DIR,
+    "@shiki/transformers": consts.SHIKI_TRANSFORMERS_FILE,
+    consts.SHIKI_CODE_LOGIC_IMPORT_NAME: consts.STATIC_DIR / "shiki_code_logic.js",
+    consts.LANGS_IMPORT_NAME: consts.LANG_DIR,
+    consts.THEMES_IMPORT_NAME: consts.THEME_DIR,
 }
 
 _ZERO_IMPORT_MAPS = {
-    "@shiki/transformers": _SHIKI_TRANSFORMERS_FILE,
-    f"{_LANGS_IMPORT_NAME}python.mjs": _LANG_DIR / "python.mjs",
-    f"{_THEMES_IMPORT_NAME}vitesse-light.mjs": _THEME_DIR / "vitesse-light.mjs",
-    f"{_THEMES_IMPORT_NAME}vitesse-dark.mjs": _THEME_DIR / "vitesse-dark.mjs",
+    "@shiki/transformers": consts.SHIKI_TRANSFORMERS_FILE,
+    consts.SHIKI_CODE_LOGIC_IMPORT_NAME: consts.STATIC_DIR / "shiki_code_logic.js",
+    f"{consts.LANGS_IMPORT_NAME}python.mjs": consts.LANG_DIR / "python.mjs",
+    f"{consts.THEMES_IMPORT_NAME}vitesse-light.mjs": consts.THEME_DIR
+    / "vitesse-light.mjs",
+    f"{consts.THEMES_IMPORT_NAME}vitesse-dark.mjs": consts.THEME_DIR
+    / "vitesse-dark.mjs",
 }
 
 
@@ -32,7 +27,7 @@ class Code(
     custom.element,
     esm="./static/shiki_code.js",
     externals=_IMPORT_MAPS,
-    css=[_STYLE],
+    css=[consts.SHIKI_STYLE_FILE],
 ):
     # _language_folder: ClassVar[Path] = _LANGUAGE_DIR
 
@@ -76,7 +71,7 @@ class Code(
             return
 
         self.update_dependencies(
-            css=[_STYLE], externals=_ZERO_IMPORT_MAPS, replace=True
+            css=[consts.SHIKI_STYLE_FILE], externals=_ZERO_IMPORT_MAPS, replace=True
         )
 
     @staticmethod
@@ -85,8 +80,8 @@ class Code(
             add_languages = [add_languages]
 
         for lang in add_languages or []:
-            name = f"{_LANGS_IMPORT_NAME}{lang}.mjs"
-            path = _LANG_DIR / f"{lang}.mjs"
+            name = f"{consts.LANGS_IMPORT_NAME}{lang}.mjs"
+            path = consts.LANG_DIR / f"{lang}.mjs"
             _ZERO_IMPORT_MAPS[name] = path
 
 

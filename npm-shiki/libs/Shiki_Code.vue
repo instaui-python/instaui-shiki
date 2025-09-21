@@ -1,12 +1,12 @@
 <script setup lang="ts">
 import { ref, watch, computed, normalizeClass } from "vue";
 import { useBindingGetter } from "instaui";
-import type { TProps } from "./types";
+import type { TProps } from "@/types";
 import {
   highlighterTask,
   getTransformers,
   readyCopyButton,
-} from "./shiki_code";
+} from "@/shiki_code_logic";
 
 const props = defineProps<TProps>();
 
