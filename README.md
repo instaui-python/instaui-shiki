@@ -19,12 +19,13 @@ pip install instaui-shiki
 ## 🖥️ Usage
 ```python
 from instaui import ui
+from instaui_shiki import shiki
 
 @ui.page("/")
 def test_page():
-    ui.code("print('foo')")
+    shiki("print('foo')")
 
 
-ui.server().run()
+ui.server(debug=True).run()
 ```
 
