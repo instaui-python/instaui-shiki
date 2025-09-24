@@ -14,4 +14,4 @@ THEMES_IMPORT_NAME: Final = "@shiki/themes/"
 SHIKI_CODE_LOGIC_IMPORT_NAME: Final = "@/shiki_code_logic"
 
 # cdn
-SHIKI_CODE_LOGIC_CDN: Final = f"https://cdn.jsdelivr.net/gh/instaui-python/instaui-shiki@{__version__}/shiki-dist/shiki_code_logic.js"
+SHIKI_CODE_LOGIC_CDN: Final = f"https://cdn.jsdelivr.net/gh/instaui-python/instaui-shiki@v{__version__}/shiki-dist/shiki_code_logic.js"
