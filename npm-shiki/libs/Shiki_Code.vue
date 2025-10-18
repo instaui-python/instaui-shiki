@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref, watch, computed, normalizeClass } from "vue";
-import { useBindingGetter } from "instaui";
+import { useBindingGetter, useLanguage } from "instaui";
 import type { TProps } from "@/types";
 import {
   highlighterTask,
@@ -59,10 +59,18 @@ watch(
 
 // copy button
 const { copyButtonClick, btnClasses } = readyCopyButton(props);
+
+const language = useLanguage();
+
+const style = computed(() => {
+  return `--shiki-code-copy-copied-text-content: '${
+    language.value === "zh_CN" ? "已复制" : "Copied"
+  }'`;
+});
 </script>
 
 <template>
-  <div :class="classes">
+  <div :class="classes" :style="style">
     <button
       :class="btnClasses"
       title="Copy Code"
