@@ -1,5 +1,6 @@
 from __tests.testing_zero.context import ZeroContext as Context
 from instaui import ui, html, zero
+from instaui_shiki import shiki
 
 
 def test_base(context: Context):
@@ -7,7 +8,7 @@ def test_base(context: Context):
         code = ui.state("print('foo')")
 
         html.textarea(code)
-        ui.code(code)
+        shiki(code)
 
     context.open(zero().to_html_str(index))
 

@@ -1,5 +1,6 @@
 from __tests.testing_web.context import Context
 from instaui import ui, html
+from instaui_shiki import shiki
 
 
 def test_base(context: Context):
@@ -8,7 +9,7 @@ def test_base(context: Context):
         code = ui.state("print('foo')")
 
         html.textarea(code)
-        ui.code(code)
+        shiki(code)
 
     context.open()
     input = context.find(kind="textbox")
@@ -24,7 +25,7 @@ def test_diff(context: Context):
     @context.register_page
     def index():
         code = ui.state("print('foo') # [!code --]")
-        ui.code(code, transformers=["notationDiff"])
+        shiki(code, transformers=["notationDiff"])
 
     context.open()
 
