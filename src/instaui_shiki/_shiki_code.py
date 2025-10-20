@@ -85,4 +85,13 @@ class Code(
             _ZERO_IMPORT_MAPS[name] = path
 
 
-TTransformerNames = Literal["notationDiff"]
+TTransformerNames = Literal[
+    "notationDiff",
+    "notationHighlight",
+    "notationWordHighlight",
+    "notationFocus",
+    "notationErrorLevel",
+    "renderWhitespace",
+    "metaHighlight",
+    "metaWordHighlight",
+]
