@@ -7,6 +7,7 @@ import {
   getTransformers,
   readyCopyButton,
 } from "@/shiki_code_logic";
+import { trimNewlines } from "./utils";
 
 const props = defineProps<TProps>();
 
@@ -40,7 +41,7 @@ watch(
     if (!code) {
       return;
     }
-    code = code.trim();
+    code = trimNewlines(code);
     const highlighter = await highlighterTask;
     const transformers = await getTransformers(transformerNames);
 
