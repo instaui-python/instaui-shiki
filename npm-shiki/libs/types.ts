@@ -1,5 +1,3 @@
-// props: ['code', 'language', 'theme', 'themes', 'transformers', 'lineNumbers'],
-
 export type TProps = {
   code: string;
   language: string;
@@ -8,4 +6,5 @@ export type TProps = {
   transformers: string[];
   lineNumbers: boolean;
   useDark: boolean;
+  decorations: Record<string, any>[];
 };

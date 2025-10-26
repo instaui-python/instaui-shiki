@@ -3,7 +3,7 @@ from typing import Dict, Iterable, List, Literal, Optional
 from instaui import ui, custom
 from instaui.runtime import get_app_slot
 from . import consts
-
+from ._decorations import DecorationTypedDict
 
 _IMPORT_MAPS = {
     "@shiki/transformers": consts.SHIKI_TRANSFORMERS_FILE,
@@ -40,24 +40,21 @@ class Code(
         themes: Optional[Dict[str, str]] = None,
         transformers: Optional[List[TTransformerNames]] = None,
         line_numbers: Optional[ui.TMaybeRef[bool]] = None,
+        decorations: Optional[list[DecorationTypedDict]] = None,
     ):
         super().__init__()
         self.props({"code": code, "useDark": custom.convert_reference(ui.use_dark())})
 
-        if language:
-            self.props({"language": language})
-
-        if theme:
-            self.props({"theme": theme})
-
-        if themes:
-            self.props({"themes": themes})
-
-        if transformers:
-            self.props({"transformers": transformers})
-
-        if line_numbers is not None:
-            self.props({"lineNumbers": line_numbers})
+        self.props(
+            {
+                "language": language,
+                "theme": theme,
+                "themes": themes,
+                "transformers": transformers,
+                "lineNumbers": line_numbers,
+                "decorations": decorations,
+            }
+        )
 
     def _to_json_dict(self):
         self.use_zero_dependency()
