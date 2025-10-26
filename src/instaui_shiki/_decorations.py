@@ -1,3 +1,4 @@
+from typing import Union
 from typing_extensions import TypedDict
 
 
@@ -7,13 +8,15 @@ class PositionTypedDict(TypedDict):
 
 
 class DecorationTypedDict(TypedDict):
-    start: PositionTypedDict
-    end: PositionTypedDict
+    start: Union[PositionTypedDict, int]
+    end: Union[PositionTypedDict, int]
     properties: dict
 
 
 def decoration(
-    start: PositionTypedDict, end: PositionTypedDict, properties: dict
+    start: Union[PositionTypedDict, int],
+    end: Union[PositionTypedDict, int],
+    properties: dict,
 ) -> DecorationTypedDict:
     """
 
