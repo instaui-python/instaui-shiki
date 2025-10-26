@@ -53,6 +53,7 @@ watch(
       colorReplacements: {
         "#ffffff": "#f8f8f2",
       },
+      decorations: props.decorations,
     });
   },
   { immediate: true }
