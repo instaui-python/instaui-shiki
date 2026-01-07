@@ -1,6 +1,6 @@
 import typing
-from playwright.sync_api import Page
-from instaui.launch_collector import PageInfo
+from time import sleep
+from playwright.sync_api import Page, Error
 from .server import TestServer
 from __tests.screen import BaseContext
 
@@ -29,6 +29,7 @@ class Context(BaseContext):
         self,
         *,
         path: typing.Optional[str] = None,
+        cache: bool = False,
     ): ...
 
     def register_page(
@@ -36,6 +37,7 @@ class Context(BaseContext):
         fn: typing.Optional[typing.Callable] = None,
         *,
         path: typing.Optional[str] = None,
+        cache: bool = False,
     ):
         if fn is None:
 
@@ -47,11 +49,8 @@ class Context(BaseContext):
 
             return wrapper
 
-        self._test_server._server.register_page(
-            PageInfo(
-                self._path + (path or ""),
-                fn,
-            )
+        self._test_server._server._runtime.backend.register_dynamic_page(
+            self._path + (path or ""), fn, cache=cache
         )
 
     @property
@@ -60,8 +59,18 @@ class Context(BaseContext):
 
     def open(self) -> None:
         url = self._root_path + self._path
-        self.page.goto(url)
+        goto_with_retry(self.page, url)
 
     def open_by_path(self, path: str) -> None:
         url = self._root_path + self._path + path
-        self.page.goto(url)
+        goto_with_retry(self.page, url)
+
+
+def goto_with_retry(page: Page, url: str, retries=5):
+    for i in range(retries):
+        try:
+            return page.goto(url, wait_until="load")
+        except Error:
+            if i == retries - 1:
+                raise
+            sleep(1)

@@ -1,6 +1,6 @@
 from typing import Optional
-from instaui.zero.options import CdnResourceOption
-from instaui_shiki import consts
+from instaui.cdn.options import CdnResourceOption
+from instaui_shiki import resources
 
 
 def override(
@@ -15,7 +15,7 @@ def override(
     if others:
         import_maps.update(others)
     if shiki_code_logic_js:
-        import_maps[consts.SHIKI_CODE_LOGIC_IMPORT_NAME] = shiki_code_logic_js
+        import_maps[resources.SHIKI_CODE_LOGIC_IMPORT_NAME] = shiki_code_logic_js
 
     return CdnResourceOption(
         import_maps=import_maps,
@@ -24,5 +24,5 @@ def override(
 
 def default_override() -> CdnResourceOption:
     return override(
-        shiki_code_logic_js=consts.SHIKI_CODE_LOGIC_CDN,
+        shiki_code_logic_js=resources.SHIKI_CODE_LOGIC_CDN,
     )

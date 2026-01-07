@@ -1,49 +1,35 @@
 from __future__ import annotations
-from typing import Dict, Iterable, List, Literal, Optional
+from typing import Dict, List, Optional
 from instaui import ui, custom
-from instaui.runtime import get_app_slot
-from . import consts
+from . import resources, types
 from ._decorations import DecorationTypedDict
-
-_IMPORT_MAPS = {
-    "@shiki/transformers": consts.SHIKI_TRANSFORMERS_FILE,
-    consts.SHIKI_CODE_LOGIC_IMPORT_NAME: consts.STATIC_DIR / "shiki_code_logic.js",
-    consts.LANGS_IMPORT_NAME: consts.LANG_DIR,
-    consts.THEMES_IMPORT_NAME: consts.THEME_DIR,
-}
-
-_ZERO_IMPORT_MAPS = {
-    "@shiki/transformers": consts.SHIKI_TRANSFORMERS_FILE,
-    consts.SHIKI_CODE_LOGIC_IMPORT_NAME: consts.STATIC_DIR / "shiki_code_logic.js",
-    f"{consts.LANGS_IMPORT_NAME}python.mjs": consts.LANG_DIR / "python.mjs",
-    f"{consts.THEMES_IMPORT_NAME}vitesse-light.mjs": consts.THEME_DIR
-    / "vitesse-light.mjs",
-    f"{consts.THEMES_IMPORT_NAME}vitesse-dark.mjs": consts.THEME_DIR
-    / "vitesse-dark.mjs",
-}
+from .zero_ext_resolver import ZeroExtensionResolver
 
 
 class Code(
     custom.element,
     esm="./static/shiki_code.js",
-    externals=_IMPORT_MAPS,
-    css=[consts.SHIKI_STYLE_FILE],
+    externals=resources.IMPORT_MAPS,
+    css=[resources.SHIKI_STYLE_FILE],
+    zero_externals=resources.ZERO_IMPORT_MAPS,
+    zero_css=[resources.SHIKI_STYLE_FILE],
 ):
-    # _language_folder: ClassVar[Path] = _LANGUAGE_DIR
+    __zero_extension_resolver__ = ZeroExtensionResolver()
 
     def __init__(
         self,
-        code: ui.TMaybeRef[str],
+        code: str,
         *,
-        language: Optional[ui.TMaybeRef[str]] = None,
-        theme: Optional[ui.TMaybeRef[str]] = None,
+        language: Optional[str] = None,
+        theme: Optional[str] = None,
         themes: Optional[Dict[str, str]] = None,
-        transformers: Optional[List[TTransformerNames]] = None,
-        line_numbers: Optional[ui.TMaybeRef[bool]] = None,
+        transformers: Optional[List[types.TTransformerNames]] = None,
+        line_numbers: Optional[bool] = None,
         decorations: Optional[list[DecorationTypedDict]] = None,
     ):
+        use_dark = ui.use_dark()
         super().__init__()
-        self.props({"code": code, "useDark": custom.convert_reference(ui.use_dark())})
+        self.props({"code": code, "useDark": custom.convert_reference(use_dark)})
 
         self.props(
             {
@@ -56,39 +42,8 @@ class Code(
             }
         )
 
-    def _to_json_dict(self):
-        self.use_zero_dependency()
-        return super()._to_json_dict()
-
-    def use_zero_dependency(self):
-        app = get_app_slot()
-        tag_name = self.dependency.tag_name  # type: ignore
-
-        if app.mode != "zero" or app.has_temp_component_dependency(tag_name):
-            return
-
-        self.update_dependencies(
-            css=[consts.SHIKI_STYLE_FILE], externals=_ZERO_IMPORT_MAPS, replace=True
-        )
-
     @staticmethod
-    def update_zero_dependency(add_languages: Optional[Iterable[str]] = None):
-        if isinstance(add_languages, str):
-            add_languages = [add_languages]
-
-        for lang in add_languages or []:
-            name = f"{consts.LANGS_IMPORT_NAME}{lang}.mjs"
-            path = consts.LANG_DIR / f"{lang}.mjs"
-            _ZERO_IMPORT_MAPS[name] = path
-
-
-TTransformerNames = Literal[
-    "notationDiff",
-    "notationHighlight",
-    "notationWordHighlight",
-    "notationFocus",
-    "notationErrorLevel",
-    "renderWhitespace",
-    "metaHighlight",
-    "metaWordHighlight",
-]
+    def use_language_in_zero(*languages: str):
+        custom.register_component_extension(
+            target=Code, kind="langs", values=list(languages)
+        )
