@@ -27,9 +27,8 @@ class Code(
         line_numbers: Optional[bool] = None,
         decorations: Optional[list[DecorationTypedDict]] = None,
     ):
-        use_dark = ui.use_dark()
         super().__init__()
-        self.props({"code": code, "useDark": custom.convert_reference(use_dark)})
+        self.props({"code": code, "useDark": custom.convert_reference(ui.use_dark())})
 
         self.props(
             {
