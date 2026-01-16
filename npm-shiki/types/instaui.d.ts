@@ -1,9 +1,14 @@
 import type { Ref } from "vue";
 
+type TAppMode = "web" | "webview" | "zero";
+
 declare module "instaui" {
   export function useBindingGetter(): {
-    getValue: (key: any) => any;
+    getRef: (key: any) => Ref;
   };
 
   export function useLanguage(): Ref<string>;
+  export function getAppInfo(): {
+    mode: TAppMode;
+  };
 }

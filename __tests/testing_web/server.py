@@ -1,28 +1,22 @@
-from contextlib import asynccontextmanager
-import threading
 import socket
+import threading
 from instaui import ui
 
-
-START_PORT, END_PORT = 30100, 30200
+START_PORT, END_PORT = 40000, 40100
 
 
 class TestServer:
     def __init__(self) -> None:
         self.connected = threading.Event()
         self._server = ui.server(debug=False)
-        self.port = _find_available_port(START_PORT, END_PORT)
+        self.port = find_available_port(START_PORT, END_PORT)
 
-        @asynccontextmanager
-        async def lifespan_wrapper(app):
-            self.connected.set()
-            yield
-
-        self._server.router.lifespan_context = lifespan_wrapper
+        self._server.add_startup_hook(self.connected.set)
 
         self.server_thread = threading.Thread(
             target=self._server.run,
             kwargs={"port": self.port, "reload": False, "log_level": "warning"},
+            daemon=True,
         )
 
         self._is_started = False
@@ -41,10 +35,10 @@ class TestServer:
         self.connected.wait(timeout=timeout)
 
     def stop(self) -> None:
-        self._server.try_close_server()
+        self._server._runtime.backend.try_close_server()
 
 
-def _find_available_port(start_port: int, end_port: int):
+def find_available_port(start_port: int, end_port: int):
     for port in range(start_port, end_port + 1):
         try:
             with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:

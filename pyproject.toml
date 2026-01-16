@@ -9,20 +9,36 @@ authors = [
     { name = "CrystalWindSnake", email = "568166495@qq.com" }
 ]
 
-requires-python = ">=3.9,<3.14"
+requires-python = ">=3.10,<3.14"
 
 dependencies = [
-    "instaui>=0.7.8",
+    "instaui>=0.8.2",
 ]
 
 [dependency-groups]
 dev = [
-    "instaui[all]",
-    "playwright==1.48.0",
-    "pytest>=8.3.5",
-    "pytest-asyncio>=0.24.0",
+    {include-group = "test"},
+    {include-group = "web"},
+    {include-group = "playwright"},
+    {include-group = "lint"},
+]
+
+playwright = [
+    "playwright==1.57.0",
     "pytest-playwright>=0.7.1",
 ]
+
+test = [
+    "instaui[all]",
+    "pytest>=8.3.5",
+    "pytest-asyncio>=0.24.0",
+]
+
+web = [
+    "fastapi[standard]>=0.115.12",
+    "uvicorn>=0.33.0",
+]
+
 git = [
     "pre-commit>=3.5.0",
 ]
@@ -46,4 +62,3 @@ include = [
 
 [tool.hatch.build.force-include]
 "src/instaui_shiki/static" = "src/instaui_shiki/static"
-

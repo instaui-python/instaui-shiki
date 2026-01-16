@@ -6,7 +6,7 @@ import {
   highlighterTask,
   getTransformers,
   readyCopyButton,
-} from "@/shiki_code_logic";
+} from "@/shiki-code-logic";
 import { trimNewlines } from "./utils";
 
 const props = defineProps<TProps>();
@@ -19,11 +19,12 @@ const {
   },
   useDark,
 } = props;
-const { getValue } = useBindingGetter();
+const { getRef } = useBindingGetter();
+const dark = getRef(useDark);
 const highlightedCode = ref("");
 const realLanguage = computed(() => props.language || "python");
 const realTheme = computed(
-  () => props.theme || (getValue(useDark) ? "dark" : "light")
+  () => props.theme || (dark.value ? "dark" : "light")
 );
 const realLineNumbers = computed(() => props.lineNumbers ?? true);
 const classes = computed(() => {

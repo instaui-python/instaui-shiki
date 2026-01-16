@@ -18,14 +18,16 @@ PY_SHIKI_DIST = PY_PROJECT_ROOT.joinpath("shiki-dist").resolve()
 DIST_PATH = PORJECT_ROOT.joinpath("dist").resolve()
 
 
-SHIKI_CODE_FILE = DIST_PATH.joinpath("shiki_code.js").resolve()
+SHIKI_CODE_FILE = DIST_PATH.joinpath("shiki-code.js").resolve()
 SHIKI_TRANSFORMERS_FILE = DIST_PATH.joinpath("shiki-transformers.js").resolve()
 SHIKI_STYLE_FILE = DIST_PATH.joinpath("shiki-style.css").resolve()
 
-SHIKI_CORE_LOGIC_FILE = DIST_PATH.joinpath("shiki_code_logic.js").resolve()
+SHIKI_CORE_LOGIC_FILE = DIST_PATH.joinpath("shiki-code-logic.js").resolve()
 
 STATIC_PATH = PY_PROJECT_ROOT.joinpath("src/instaui_shiki/static").resolve()
 
+# shiki-engine
+SHIKI_ENGINE_FILE = DIST_PATH.joinpath("shiki-engine.js").resolve()
 
 LANGS_FILES = [
     "css.mjs",
@@ -77,6 +79,7 @@ def copy_to_static():
     shutil.copyfile(
         SHIKI_CORE_LOGIC_FILE, STATIC_PATH.joinpath(SHIKI_CORE_LOGIC_FILE.name)
     )
+    shutil.copyfile(SHIKI_ENGINE_FILE, STATIC_PATH.joinpath(SHIKI_ENGINE_FILE.name))
 
     # for cdn
     reset_folder(PY_SHIKI_DIST, exist_ok=True)

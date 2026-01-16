@@ -19,10 +19,15 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+
       - name: Install uv
         uses: astral-sh/setup-uv@v5
         with:
           enable-cache: true
+          cache-suffix: py${{ matrix.python-version }}
 
       - name: set up npm-shiki
         uses: instaui-python/org-ci-config/.github/actions/npm-env@main
@@ -36,7 +41,7 @@ jobs:
       - name: run tests
         timeout-minutes: 1
         run: |
-          uv run --no-sources pytest __tests
+          uv run --python python --no-dev pytest __tests
         shell: bash
 
  
