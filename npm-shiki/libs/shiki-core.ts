@@ -1,6 +1,8 @@
 import { createHighlighterCore } from "shiki/core";
-import { createOnigurumaEngine } from "shiki/engine/oniguruma";
-import getWasm from "shiki/wasm";
+// import { createOnigurumaEngine } from "shiki/engine/oniguruma";
+// import getWasm from "shiki/wasm";
+import { getAppInfo } from "instaui";
+// import { SHIKI_WASM_SYMBOL } from "./shiki-wasm-symbol";
 
 export async function createHighlighter(options: {
   themes: string[];
@@ -19,9 +21,16 @@ export async function createHighlighter(options: {
     )
   );
 
+  const appInfo = getAppInfo();
+
+  const engine =
+    !appInfo || appInfo.mode === "zero"
+      ? (window as any)["__shiki_engine_wasm__"]
+      : (await import("@/shiki-engine")).getEngine();
+
   const highlighter = await createHighlighterCore({
     themes: themesModule,
-    engine: createOnigurumaEngine(getWasm),
+    engine: engine,
   });
 
   async function codeToHtml(code: string, options: any) {

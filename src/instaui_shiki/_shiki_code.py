@@ -8,7 +8,7 @@ from .zero_ext_resolver import ZeroExtensionResolver
 
 class Code(
     custom.element,
-    esm="./static/shiki_code.js",
+    esm="./static/shiki-code.js",
     externals=resources.IMPORT_MAPS,
     css=[resources.SHIKI_STYLE_FILE],
     zero_externals=resources.ZERO_IMPORT_MAPS,
@@ -40,6 +40,15 @@ class Code(
                 "decorations": decorations,
             }
         )
+
+        if custom.app_mode() == custom.RuntimeMode.ZERO:
+
+            @custom.page_once
+            def add_shiki_engine():
+                ui.add_js_code(
+                    resources.SHIKI_ENGINE_FILE.read_text(encoding="utf-8"),
+                    script_attrs={"type": "module"},
+                )
 
     @staticmethod
     def use_language_in_zero(*languages: str):

@@ -15,11 +15,12 @@ export default defineConfig({
   build: {
     lib: {
       entry: {
-        shiki_code: path.resolve(__dirname, "libs/main.ts"),
-        shiki_code_logic: path.resolve(__dirname, "libs/shiki_code_logic.ts"),
+        "shiki-code": path.resolve(__dirname, "libs/main.ts"),
+        "shiki-engine": path.resolve(__dirname, "libs/shiki-engine.ts"),
+        "shiki-code-logic": path.resolve(__dirname, "libs/shiki-code-logic.ts"),
         "shiki-transformers": path.resolve(
           __dirname,
-          "libs/shiki_transformers.ts"
+          "libs/shiki-transformers.ts"
         ),
       },
       fileName: (_, entryName) => `${entryName}.js`,
@@ -29,7 +30,13 @@ export default defineConfig({
     // sourcemap: true,
 
     rollupOptions: {
-      external: ["vue", "@/shiki_code_logic", "@shiki/transformers", "instaui"],
+      external: [
+        "vue",
+        "@/shiki-code-logic",
+        "@shiki/transformers",
+        "instaui",
+        "shiki-engine",
+      ],
     },
   },
 });

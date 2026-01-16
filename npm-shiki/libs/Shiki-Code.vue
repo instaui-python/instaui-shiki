@@ -6,7 +6,7 @@ import {
   highlighterTask,
   getTransformers,
   readyCopyButton,
-} from "@/shiki_code_logic";
+} from "@/shiki-code-logic";
 import { trimNewlines } from "./utils";
 
 const props = defineProps<TProps>();
