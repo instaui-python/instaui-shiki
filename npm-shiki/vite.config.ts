@@ -20,14 +20,14 @@ export default defineConfig({
         "shiki-code-logic": path.resolve(__dirname, "libs/shiki-code-logic.ts"),
         "shiki-transformers": path.resolve(
           __dirname,
-          "libs/shiki-transformers.ts"
+          "libs/shiki-transformers.ts",
         ),
       },
       fileName: (_, entryName) => `${entryName}.js`,
       formats: ["es"],
       cssFileName: "shiki-style",
     },
-    // sourcemap: true,
+    // sourcemap: "inline",
 
     rollupOptions: {
       external: [
@@ -35,7 +35,7 @@ export default defineConfig({
         "@/shiki-code-logic",
         "@shiki/transformers",
         "instaui",
-        "shiki-engine",
+        "@/shiki-engine",
       ],
     },
   },
