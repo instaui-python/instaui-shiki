@@ -1,11 +1,6 @@
 import { computed, normalizeClass, watch } from "vue";
 import { useClipboard } from "@vueuse/core";
-import { createHighlighter } from "@/shiki-core";
 import type { TProps } from "@/types";
-
-export const highlighterTask = createHighlighter({
-  themes: ["vitesse-dark", "vitesse-light"],
-});
 
 function transformersModuleGetter() {
   let module: any = null;
@@ -56,7 +51,7 @@ export function readyCopyButton(props: TProps) {
           (e.target! as any).blur();
         }
       },
-      { once: true }
+      { once: true },
     );
   }
 

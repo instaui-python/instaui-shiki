@@ -1,10 +1,7 @@
 import { createHighlighterCore } from "shiki/core";
-// import { createOnigurumaEngine } from "shiki/engine/oniguruma";
-// import getWasm from "shiki/wasm";
 import { getAppInfo } from "instaui";
-// import { SHIKI_WASM_SYMBOL } from "./shiki-wasm-symbol";
 
-export async function createHighlighter(options: {
+async function createHighlighter(options: {
   themes: string[];
   themeModulePath?: string;
   langModulePath?: string;
@@ -17,8 +14,8 @@ export async function createHighlighter(options: {
 
   const themesModule = await Promise.all(
     themes.map(
-      (theme) => import(/* @vite-ignore */ `${themeModulePath}${theme}.mjs`)
-    )
+      (theme) => import(/* @vite-ignore */ `${themeModulePath}${theme}.mjs`),
+    ),
   );
 
   const appInfo = getAppInfo();
@@ -37,7 +34,7 @@ export async function createHighlighter(options: {
     const { lang } = options;
     if (lang) {
       await highlighter.loadLanguage(
-        import(/* @vite-ignore */ `${langModulePath}${lang}.mjs`)
+        import(/* @vite-ignore */ `${langModulePath}${lang}.mjs`),
       );
     }
 
@@ -47,4 +44,15 @@ export async function createHighlighter(options: {
   return {
     codeToHtml,
   };
+}
+
+let _highlighterPromise: ReturnType<typeof createHighlighter> | null = null;
+
+export function getHighlighter() {
+  if (!_highlighterPromise) {
+    _highlighterPromise = createHighlighter({
+      themes: ["vitesse-dark", "vitesse-light"],
+    });
+  }
+  return _highlighterPromise;
 }

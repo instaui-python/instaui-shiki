@@ -2,11 +2,8 @@
 import { ref, watch, computed, normalizeClass } from "vue";
 import { useBindingGetter, useLanguage } from "instaui";
 import type { TProps } from "@/types";
-import {
-  highlighterTask,
-  getTransformers,
-  readyCopyButton,
-} from "@/shiki-code-logic";
+import { getTransformers, readyCopyButton } from "@/shiki-code-logic";
+import { getHighlighter } from "@/shiki-core";
 import { trimNewlines } from "./utils";
 
 const props = defineProps<TProps>();
@@ -24,7 +21,7 @@ const dark = getRef(useDark);
 const highlightedCode = ref("");
 const realLanguage = computed(() => props.language || "python");
 const realTheme = computed(
-  () => props.theme || (dark.value ? "dark" : "light")
+  () => props.theme || (dark.value ? "dark" : "light"),
 );
 const realLineNumbers = computed(() => props.lineNumbers ?? true);
 const classes = computed(() => {
@@ -43,7 +40,7 @@ watch(
       return;
     }
     code = trimNewlines(code);
-    const highlighter = await highlighterTask;
+    const highlighter = await getHighlighter();
     const transformers = await getTransformers(transformerNames);
 
     highlightedCode.value = await highlighter.codeToHtml(code, {
@@ -57,7 +54,7 @@ watch(
       decorations: props.decorations,
     });
   },
-  { immediate: true }
+  { immediate: true },
 );
 
 // copy button
