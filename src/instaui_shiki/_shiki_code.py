@@ -41,7 +41,7 @@ class Code(
             }
         )
 
-        if custom.app_mode() == custom.RuntimeMode.ZERO:
+        if custom.runtime.is_zero:
 
             @custom.page_once
             def add_shiki_engine():
