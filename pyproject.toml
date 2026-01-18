@@ -12,7 +12,7 @@ authors = [
 requires-python = ">=3.10,<3.14"
 
 dependencies = [
-    "instaui>=0.8.3",
+    "instaui>=0.8.4",
 ]
 
 [dependency-groups]

@@ -434,7 +434,7 @@ wheels = [
 
 [[package]]
 name = "instaui"
-version = "0.8.3"
+version = "0.8.4"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "jinja2" },
@@ -442,9 +442,9 @@ dependencies = [
     { name = "pydantic" },
     { name = "typing-extensions" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/c2/b5/fb3154b919977d1faf629025b5ccf932af932b2c6b5d8cbecf7171c4f188/instaui-0.8.3.tar.gz", hash = "sha256:e2c994e4085dff5451cd4ef6a6f7a357034d19feeadaed903a6b84067b0626d8", size = 374622, upload-time = "2026-01-17T13:41:44.458Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/ee/c4/c361a636e8d37993a8465d361c0b9d134640a3b1de66c84f0df851f5ade7/instaui-0.8.4.tar.gz", hash = "sha256:ccd3edc44b9837cfb3557abff6ba7367158d58930348958b8d05a7e6fc13bbd1", size = 374961, upload-time = "2026-01-18T11:21:33.765Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/6b/58/f607d612fbedf02f9826e9f55e603cab2f98f754a3fd91d6db2e1b394f26/instaui-0.8.3-py3-none-any.whl", hash = "sha256:f043aa7bceeba08a4e9ba2f0540763f3d52840eac47ad97bc3a569894790536b", size = 496746, upload-time = "2026-01-17T13:41:42.201Z" },
+    { url = "https://files.pythonhosted.org/packages/f4/a9/b1a9a18283bc85ff75de1599718f7f56f5d68157276976601d50211add62/instaui-0.8.4-py3-none-any.whl", hash = "sha256:704a7dda2dadedc3ca7b430e30428fb818ac8d817429baabe2011477163221fa", size = 497595, upload-time = "2026-01-18T11:21:32.222Z" },
 ]
 
 [package.optional-dependencies]
@@ -494,7 +494,7 @@ web = [
 ]
 
 [package.metadata]
-requires-dist = [{ name = "instaui", specifier = ">=0.8.3" }]
+requires-dist = [{ name = "instaui", specifier = ">=0.8.4" }]
 
 [package.metadata.requires-dev]
 dev = [
