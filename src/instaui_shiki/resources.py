@@ -16,7 +16,7 @@ SHIKI_ENGINE_FILE: Final = STATIC_DIR / "shiki-engine.js"
 
 
 # cdn
-SHIKI_CODE_LOGIC_CDN: Final = f"https://cdn.jsdelivr.net/gh/instaui-python/instaui-shiki@v{__version__}/shiki-dist/shiki_code_logic.js"
+SHIKI_CODE_LOGIC_CDN: Final = f"https://cdn.jsdelivr.net/gh/instaui-python/instaui-shiki@v{__version__}/shiki-dist/shiki-code-logic.js"
 
 
 IMPORT_MAPS = {
