@@ -45,9 +45,9 @@ class Code(
 
             @custom.page_once
             def add_shiki_engine():
-                ui.add_js_code(
+                ui.add_js_inline(
                     resources.SHIKI_ENGINE_FILE.read_text(encoding="utf-8"),
-                    script_attrs={"type": "module"},
+                    module=True,
                 )
 
     @staticmethod
