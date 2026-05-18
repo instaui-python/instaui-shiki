@@ -1,5 +1,7 @@
 from pathlib import Path
+
 from instaui.internal.assets import AssetsDeclaration
+
 from . import consts, resources
 
 ROOT = Path(__file__).parent

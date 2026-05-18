@@ -1,5 +1,6 @@
+from instaui import html, ui
+
 from __tests.testing_web.context import Context
-from instaui import ui, html
 from instaui_shiki import shiki
 
 

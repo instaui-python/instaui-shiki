@@ -1,6 +1,5 @@
 from typing import Literal
 
-
 TTransformerNames = Literal[
     "notationDiff",
     "notationHighlight",

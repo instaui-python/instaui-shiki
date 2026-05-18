@@ -1,8 +1,11 @@
 import typing
 from time import sleep
-from playwright.sync_api import Page, Error
-from .server import TestServer
+
+from playwright.sync_api import Error, Page
+
 from __tests.screen import BaseContext
+
+from .server import TestServer
 
 
 class Context(BaseContext):

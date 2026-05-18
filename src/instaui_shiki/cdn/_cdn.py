@@ -1,5 +1,7 @@
 from typing import Optional
+
 from instaui.cdn.options import CdnResourceOption
+
 from instaui_shiki import resources
 
 

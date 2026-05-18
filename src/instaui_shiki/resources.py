@@ -1,5 +1,6 @@
-from typing import Final
 from pathlib import Path
+from typing import Final
+
 from instaui_shiki import __version__
 
 STATIC_DIR: Final = Path(__file__).parent / "static"

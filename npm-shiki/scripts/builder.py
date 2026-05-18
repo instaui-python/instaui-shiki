@@ -1,5 +1,5 @@
-from pathlib import Path
 import shutil
+from pathlib import Path
 
 PORJECT_ROOT = Path(__file__).parent.parent.resolve()
 

@@ -1,6 +1,9 @@
 from __future__ import annotations
+
 from typing import Dict, List, Optional
-from instaui import ui, custom
+
+from instaui import custom, ui
+
 from . import resources, types
 from ._decorations import DecorationTypedDict
 from .zero_ext_resolver import ZeroExtensionResolver
