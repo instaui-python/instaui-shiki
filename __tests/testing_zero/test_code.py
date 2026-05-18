@@ -1,5 +1,6 @@
+from instaui import html, ui, zero
+
 from __tests.testing_zero.context import ZeroContext as Context
-from instaui import ui, html, zero
 from instaui_shiki import shiki
 
 

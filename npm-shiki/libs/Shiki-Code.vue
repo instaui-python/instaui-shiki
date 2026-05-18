@@ -1,9 +1,12 @@
 <script setup lang="ts">
-import { ref, watch, computed, normalizeClass } from "vue";
 import { useBindingGetter, useLanguage } from "instaui";
+import { ref, watch, computed, normalizeClass } from "vue";
+
 import type { TProps } from "@/types";
+
 import { getTransformers, readyCopyButton } from "@/shiki-code-logic";
 import { getHighlighter } from "@/shiki-core";
+
 import { trimNewlines } from "./utils";
 
 const props = defineProps<TProps>();
@@ -20,9 +23,7 @@ const { getRef } = useBindingGetter();
 const dark = getRef(useDark);
 const highlightedCode = ref("");
 const realLanguage = computed(() => props.language || "python");
-const realTheme = computed(
-  () => props.theme || (dark.value ? "dark" : "light"),
-);
+const realTheme = computed(() => props.theme || (dark.value ? "dark" : "light"));
 const realLineNumbers = computed(() => props.lineNumbers ?? true);
 const classes = computed(() => {
   return normalizeClass([
@@ -71,11 +72,7 @@ const style = computed(() => {
 
 <template>
   <div :class="classes" :style="style">
-    <button
-      :class="btnClasses"
-      title="Copy Code"
-      @click="copyButtonClick"
-    ></button>
+    <button :class="btnClasses" title="Copy Code" @click="copyButtonClick"></button>
     <span class="lang">{{ realLanguage }}</span>
     <div v-html="highlightedCode" style="overflow: hidden"></div>
   </div>

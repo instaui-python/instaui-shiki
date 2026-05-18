@@ -1,6 +1,7 @@
-from typing import Final
 from pathlib import Path
-from instaui_shiki import __version__
+from typing import Final
+
+from .version import __version__
 
 STATIC_DIR: Final = Path(__file__).parent / "static"
 THEME_DIR: Final = STATIC_DIR / "themes"

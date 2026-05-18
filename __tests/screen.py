@@ -1,6 +1,7 @@
 import re
 import typing
-from playwright.sync_api import Page, expect, Locator
+
+from playwright.sync_api import Locator, Page, expect
 
 _TKind = typing.Literal[
     "alert",

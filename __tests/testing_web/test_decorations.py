@@ -1,5 +1,5 @@
 from __tests.testing_web.context import Context
-from instaui_shiki import shiki, decorations
+from instaui_shiki import decorations, shiki
 
 
 def test_base(context: Context):

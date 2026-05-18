@@ -1,6 +1,6 @@
+import { getAppInfo } from "instaui";
 import { createOnigurumaEngine } from "shiki/engine/oniguruma";
 import getWasm from "shiki/wasm";
-import { getAppInfo } from "instaui";
 
 const appInfo = getAppInfo();
 

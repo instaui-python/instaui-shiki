@@ -1,5 +1,6 @@
-import { computed, normalizeClass, watch } from "vue";
 import { useClipboard } from "@vueuse/core";
+import { computed, normalizeClass, watch } from "vue";
+
 import type { TProps } from "@/types";
 
 function transformersModuleGetter() {
@@ -23,9 +24,7 @@ export async function getTransformers(names: string[]) {
 
   const tfModule: any = await getTransformersModule();
   return names.map((name) => {
-    const realName = `transformer${
-      name.charAt(0).toUpperCase() + name.slice(1)
-    }`;
+    const realName = `transformer${name.charAt(0).toUpperCase() + name.slice(1)}`;
     return tfModule[realName]();
   });
 }
