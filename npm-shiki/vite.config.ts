@@ -1,6 +1,6 @@
-import { defineConfig } from "vite";
 import vue from "@vitejs/plugin-vue";
 import path from "path";
+import { defineConfig } from "vite";
 
 // https://vite.dev/config/
 export default defineConfig({
@@ -18,10 +18,7 @@ export default defineConfig({
         "shiki-code": path.resolve(__dirname, "libs/main.ts"),
         "shiki-engine": path.resolve(__dirname, "libs/shiki-engine.ts"),
         "shiki-code-logic": path.resolve(__dirname, "libs/shiki-code-logic.ts"),
-        "shiki-transformers": path.resolve(
-          __dirname,
-          "libs/shiki-transformers.ts",
-        ),
+        "shiki-transformers": path.resolve(__dirname, "libs/shiki-transformers.ts"),
       },
       fileName: (_, entryName) => `${entryName}.js`,
       formats: ["es"],
@@ -30,13 +27,7 @@ export default defineConfig({
     // sourcemap: "inline",
 
     rollupOptions: {
-      external: [
-        "vue",
-        "@/shiki-code-logic",
-        "@shiki/transformers",
-        "instaui",
-        "@/shiki-engine",
-      ],
+      external: ["vue", "@/shiki-code-logic", "@shiki/transformers", "instaui", "@/shiki-engine"],
     },
   },
 });
