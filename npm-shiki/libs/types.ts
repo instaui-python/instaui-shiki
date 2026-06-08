@@ -1,3 +1,5 @@
+import type { Ref } from "vue";
+
 export type TProps = {
   code: string;
   language: string;
@@ -5,6 +7,6 @@ export type TProps = {
   themes: Record<string, string>;
   transformers: string[];
   lineNumbers: boolean;
-  useDark: boolean;
+  useDarkRef: Ref<boolean>;
   decorations: Record<string, any>[];
 };
