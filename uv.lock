@@ -434,13 +434,17 @@ wheels = [
 
 [[package]]
 name = "instaui"
-version = "0.10.0"
-source = { editable = "../instaui" }
+version = "0.11.0"
+source = { registry = "https://pypi.tuna.tsinghua.edu.cn/simple" }
 dependencies = [
     { name = "jinja2" },
     { name = "orjson" },
     { name = "pydantic" },
     { name = "typing-extensions" },
+]
+sdist = { url = "https://pypi.tuna.tsinghua.edu.cn/packages/7e/91/747df62a2eb528b377e7e4d7bd97664d13cf661d0d5bca7272e740465265/instaui-0.11.0.tar.gz", hash = "sha256:a92522faf6bcf218bb9c39beadc3aca23f88dc1f37dfb74ce7ba5ab2e58a2ec9", size = 386993, upload-time = "2026-06-08T13:08:25.68Z" }
+wheels = [
+    { url = "https://pypi.tuna.tsinghua.edu.cn/packages/7d/44/8b3dd52e85b27f906b6fcf4aa0533e6f458fc4bff48aaff3a93c91e416e2/instaui-0.11.0-py3-none-any.whl", hash = "sha256:4ad2fb12518e2e6278bdbccfa573b09f487d7058595086a8b84a374bde609a7b", size = 501548, upload-time = "2026-06-08T13:08:27.126Z" },
 ]
 
 [package.optional-dependencies]
@@ -450,56 +454,9 @@ all = [
     { name = "uvicorn" },
 ]
 
-[package.metadata]
-requires-dist = [
-    { name = "fastapi", extras = ["standard"], marker = "extra == 'all'" },
-    { name = "fastapi", extras = ["standard"], marker = "extra == 'web'" },
-    { name = "jinja2", specifier = ">=3.1.6" },
-    { name = "orjson", specifier = ">=3.10.15" },
-    { name = "pydantic", specifier = ">=2.10.6" },
-    { name = "pywebview", marker = "extra == 'all'" },
-    { name = "pywebview", marker = "extra == 'webview'" },
-    { name = "typing-extensions", specifier = ">=4.13.2" },
-    { name = "uvicorn", marker = "extra == 'all'" },
-    { name = "uvicorn", marker = "extra == 'web'" },
-]
-provides-extras = ["web", "webview", "all"]
-
-[package.metadata.requires-dev]
-dev = [
-    { name = "beautifulsoup4", specifier = "==4.13.5" },
-    { name = "fastapi", extras = ["standard"], specifier = ">=0.115.12" },
-    { name = "playwright", specifier = "==1.57.0" },
-    { name = "pre-commit", specifier = ">=3.5.0" },
-    { name = "pytest", specifier = ">=8.3.5" },
-    { name = "pytest-asyncio", specifier = ">=0.24.0" },
-    { name = "pytest-html", specifier = ">=4.1.1" },
-    { name = "pytest-playwright", specifier = ">=0.7.1" },
-    { name = "pywebview", specifier = ">=5.4" },
-    { name = "ruff", specifier = "==0.12.2" },
-    { name = "uvicorn", specifier = ">=0.33.0" },
-]
-git = [{ name = "pre-commit", specifier = ">=3.5.0" }]
-lint = [{ name = "ruff", specifier = "==0.12.2" }]
-playwright = [
-    { name = "playwright", specifier = "==1.57.0" },
-    { name = "pytest-playwright", specifier = ">=0.7.1" },
-]
-test = [
-    { name = "beautifulsoup4", specifier = "==4.13.5" },
-    { name = "pytest", specifier = ">=8.3.5" },
-    { name = "pytest-asyncio", specifier = ">=0.24.0" },
-    { name = "pytest-html", specifier = ">=4.1.1" },
-]
-web = [
-    { name = "fastapi", extras = ["standard"], specifier = ">=0.115.12" },
-    { name = "uvicorn", specifier = ">=0.33.0" },
-]
-webview = [{ name = "pywebview", specifier = ">=5.4" }]
-
 [[package]]
 name = "instaui-shiki"
-version = "0.8.0"
+version = "0.9.0"
 source = { editable = "." }
 dependencies = [
     { name = "instaui" },
@@ -538,12 +495,12 @@ web = [
 ]
 
 [package.metadata]
-requires-dist = [{ name = "instaui", editable = "../instaui" }]
+requires-dist = [{ name = "instaui", specifier = ">=0.11.0" }]
 
 [package.metadata.requires-dev]
 dev = [
     { name = "fastapi", extras = ["standard"], specifier = ">=0.115.12" },
-    { name = "instaui", extras = ["all"], editable = "../instaui" },
+    { name = "instaui", extras = ["all"] },
     { name = "playwright", specifier = "==1.57.0" },
     { name = "pre-commit", specifier = ">=3.5.0" },
     { name = "pytest", specifier = ">=8.3.5" },
@@ -559,7 +516,7 @@ playwright = [
     { name = "pytest-playwright", specifier = ">=0.7.1" },
 ]
 test = [
-    { name = "instaui", extras = ["all"], editable = "../instaui" },
+    { name = "instaui", extras = ["all"] },
     { name = "pytest", specifier = ">=8.3.5" },
     { name = "pytest-asyncio", specifier = ">=0.24.0" },
 ]
