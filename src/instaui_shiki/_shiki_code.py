@@ -31,7 +31,9 @@ class Code(
         decorations: Optional[list[DecorationTypedDict]] = None,
     ):
         super().__init__()
-        self.props({"code": code, "useDark": custom.convert_reference(ui.use_dark())})
+        self.props(
+            {"code": code, "useDarkRef": custom.convert_reference(ui.use_dark())}
+        )
 
         self.props(
             {

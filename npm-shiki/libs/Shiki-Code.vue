@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { useBindingGetter, useLanguage } from "instaui";
+import { useLanguage } from "instaui";
 import { ref, watch, computed, normalizeClass } from "vue";
 
 import type { TProps } from "@/types";
@@ -17,13 +17,11 @@ const {
     light: "vitesse-light",
     dark: "vitesse-dark",
   },
-  useDark,
+  useDarkRef,
 } = props;
-const { getRef } = useBindingGetter();
-const dark = getRef(useDark);
 const highlightedCode = ref("");
 const realLanguage = computed(() => props.language || "python");
-const realTheme = computed(() => props.theme || (dark.value ? "dark" : "light"));
+const realTheme = computed(() => props.theme || (useDarkRef.value ? "dark" : "light"));
 const realLineNumbers = computed(() => props.lineNumbers ?? true);
 const classes = computed(() => {
   return normalizeClass([
